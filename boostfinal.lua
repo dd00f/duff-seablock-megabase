@@ -1,0 +1,7 @@
+boost( data.raw["recipe"]["wooden-board"] )
+boost( data.raw["recipe"]["phenolic-board"] )
+boost( data.raw["recipe"]["fibreglass-board"] )
+boost( data.raw["recipe"]["basic-circuit-board"] )
+boost( data.raw["recipe"]["electronic-circuit"] )
+boost( data.raw["recipe"]["silicon-wafer"] )
+boost( data.raw["recipe"]["cp-electronic-circuit-board"] )

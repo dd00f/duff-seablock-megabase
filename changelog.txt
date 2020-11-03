@@ -1,0 +1,13 @@
+1.0.0 Initial release
+	Boost recipies that match the following criteria :
+	- can be boosted by prod modules
+	- has a crafting time of less than 2 seconds
+	
+	The boost will scale up the recipe to a 3 second delay: 
+		- the energy_required will go to 3 seconds
+		- the number of output will scale up to the time scale
+		- the number of inputs will scale up to the time scale
+		- works on both normal and expensive recipie
+	
+	Initial release only covers recipes actively used in Seablock. 
+	There may be other recipies that will need a similar boost for bob/angel playthrough.
