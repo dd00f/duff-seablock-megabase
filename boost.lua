@@ -18,10 +18,6 @@ boost( data.raw["recipe"]["titanium-bearing"])
 boost( data.raw["recipe"]["ceramic-bearing"])
 boost( data.raw["recipe"]["nitinol-bearing"])
 
-
-
-
-
 boost( data.raw["recipe"]["angels-roll-aluminium-converting"] )
 boost( data.raw["recipe"]["angels-roll-chrome-converting"] )
 boost( data.raw["recipe"]["angels-roll-cobalt-converting"] )

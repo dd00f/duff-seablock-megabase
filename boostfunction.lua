@@ -1,4 +1,8 @@
 
+-- set to true to enable info logs
+local infoEnabled = false
+
+-- set to true to enable debug logs
 local debugEnabled = false
 
 function debugLog (message)
@@ -7,6 +11,11 @@ function debugLog (message)
 	end
 end
 
+function infoLog (message)
+	if( infoEnabled ) then
+		log ( message )
+	end
+end
 
 function boostRecipe (a, name)
   debugLog ("boosting ".. name)
@@ -18,7 +27,9 @@ function boostRecipe (a, name)
   
   if( a.energy_required < 2 ) then 
 	local boostfactor = 3 / a.energy_required
-	debugLog ("boosting ".. name .." with boost factor ".. boostfactor)
+	infoLog ("boosting ".. name .." with boost factor ".. boostfactor)
+    debugLog(serpent.block(a))
+	
 	a.energy_required = 3
 	
 	if( a.result_count ) then
@@ -29,6 +40,11 @@ function boostRecipe (a, name)
 			if( v.amount ) then 
 				v.amount = v.amount * boostfactor
 				debugLog (name .. " " .. i .. " result boosting v.amount to ".. v.amount)
+			elseif( v.amount_min ) then
+				v.amount_min = v.amount_min * boostfactor
+				if( v.amount_max ) then
+					v.amount_max = v.amount_max * boostfactor
+				end
 			else
 				v[2] = v[2] * boostfactor
 				debugLog("boosted ingredient array " .. v[1] .. " to " .. v[2])
@@ -59,7 +75,6 @@ end
 function boost (a)
 
   if( a ) then 
-	  debugLog(serpent.block(a))
 
 	  if( a.normal ) then
 		boostRecipe( a.normal, a.name.." normal" )
@@ -72,4 +87,12 @@ function boost (a)
 	  end  
   end
 end
+
+
+function boostall (a)
+	for i,v in pairs(a) do 
+		boost(v)
+	end
+end
+
 
