@@ -1,3 +1,11 @@
+1.1.2
+	- Boost Solid Rubber from Liquid Rubber Recipe
+	- Boost all void recipe to take 60 seconds to reduce UPS cost of furnace dynamically picking recipes
+	- Make the clarifier and flare stack fluid capacity bigger to support the larger voiding recipe above.
+
+1.1.1
+	- Boost Ore Sorting recipes
+
 1.1.0
 	- Support for Factorio version 1.1
 
