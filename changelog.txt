@@ -1,3 +1,7 @@
+1.1.3
+	- Boost all recipe to a minimum of 2 seconds so that no recipe gets speed limited by ticks.
+	- Fixes the productivity beacon bug with catalyst production.
+
 1.1.2
 	- Boost Solid Rubber from Liquid Rubber Recipe
 	- Boost all void recipe to take 60 seconds to reduce UPS cost of furnace dynamically picking recipes
