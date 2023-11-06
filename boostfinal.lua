@@ -1,17 +1,17 @@
 
-boost( data.raw["recipe"]["wooden-board"] )
-boost( data.raw["recipe"]["phenolic-board"] )
-boost( data.raw["recipe"]["fibreglass-board"] )
-boost( data.raw["recipe"]["basic-circuit-board"] )
-boost( data.raw["recipe"]["electronic-circuit"] )
-boost( data.raw["recipe"]["silicon-wafer"] )
-boost( data.raw["recipe"]["cp-electronic-circuit-board"] )
-boost( data.raw["recipe"]["rocket-engine"] )
-boost( data.raw["recipe"]["angels-glass-fiber-board"] )
-boost( data.raw["recipe"]["solid-rubber"] )
-
-
-boostPattern('angelsore.-processing');
+--boost( data.raw["recipe"]["wooden-board"] )
+--boost( data.raw["recipe"]["phenolic-board"] )
+--boost( data.raw["recipe"]["fibreglass-board"] )
+--boost( data.raw["recipe"]["basic-circuit-board"] )
+--boost( data.raw["recipe"]["electronic-circuit"] )
+--boost( data.raw["recipe"]["silicon-wafer"] )
+--boost( data.raw["recipe"]["cp-electronic-circuit-board"] )
+--boost( data.raw["recipe"]["rocket-engine"] )
+--boost( data.raw["recipe"]["angels-glass-fiber-board"] )
+--boost( data.raw["recipe"]["solid-rubber"] )
+--
+--
+--boostPattern('angelsore.-processing');
 
 -- Make void recipes longer to reduce the UPS cost of dynamically selecting void recipes
 boostPattern('-void-', 60, 40);
@@ -31,7 +31,7 @@ if clarifier then
 end
 
 -- uncomment to boost all recipe
--- boostall(data.raw["recipe"])
+boostall(data.raw["recipe"])
 
 local function resetProdBonus()
   for index, force in pairs(game.forces) do

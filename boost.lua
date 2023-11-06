@@ -1,11 +1,11 @@
 
-
+--[[
 boost( data.raw["recipe"]["insulated-cable"] )
 
 boost( data.raw["recipe"]["iron-stick"] )
 boost( data.raw["recipe"]["iron-gear-wheel"] )
 boost( data.raw["recipe"]["copper-cable"] )
-
+--]]
 --[[
 boost( data.raw["recipe"]["steel-bearing-ball"])
 boost( data.raw["recipe"]["cobalt-steel-bearing-ball"])
@@ -45,7 +45,7 @@ boost( data.raw["recipe"]["tungsten-gear-wheel"] )
 boost( data.raw["recipe"]["nitinol-gear-wheel"] )
 
 --]]
-
+--[[
 boost( data.raw["recipe"]["angels-wire-gold"] )
 boost( data.raw["recipe"]["basic-tinned-copper-wire"] )
 
@@ -63,4 +63,4 @@ boostPattern('bearing');
 
 -- ensure the mod won't crash if a recipe is missing
 boost( data.raw["recipe"]["invalid-recipe-test"] )
-
+--]]

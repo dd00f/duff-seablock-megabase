@@ -37,7 +37,7 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 	targetTime = targetTime or BOOST_TARGET_TIME
 	minimumTime = minimumTime or MINIMUM_ENERGY_REQUIRED
 
-	infoLog ("boost check on  ".. name .." with root boost factor ".. rootBoostFactor)
+	debugLog ("boost check on  ".. name .." with root boost factor ".. rootBoostFactor)
 
 	local boostFactor = 1
 	if( rootBoostFactor ~= NO_BOOST_APPLIED ) then
