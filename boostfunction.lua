@@ -29,6 +29,32 @@ function calculateBoost (energy, targetTime)
 	return targetTime / energy
 end
 
+function isItemNameStackable(itemName)
+
+	resultItem = data.raw["fluid"][itemName]
+	if( resultItem == nil ) then
+		resultItem = data.raw["item"][itemName]
+	end
+
+	if( resultItem == nil ) then
+		-- not an item, skipping
+		debugLog ("Not an ItemPrototype, deemed not stackable : " .. itemName)
+		return false
+	end
+		
+	if( resultItem.flags ~= nil ) then 
+		for j,w in ipairs(resultItem.flags) do 
+			if( w == "not-stackable" ) then 
+				if(debugEnabled) then
+					debugLog ("Item with flag not-stackable=true found :\n" .. serpent.block(resultItem))
+				end
+				return false
+			end 
+		end 
+	end 
+	return true
+end
+
 -- a = data structure of the recipe to boost, could be the root, normal or expensive data structure
 -- name = name of the recipe to boost
 -- rootBoostFactor = boost factor applied to the root of normal or expensive recipes. -1 if none was set
@@ -47,6 +73,20 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 	if( a.energy_required and a.energy_required >= minimumTime ) then 
 		debugLog ("Recipe " .. name .. " energy required of " .. a.energy_required ..  " already matches minimum of " ..  minimumTime )
 		return NO_BOOST_APPLIED
+	end
+	
+	if( a.result ) then
+		if( not isItemNameStackable(a.result) ) then 
+			debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. a.result .. " that is not-stackable")
+			return NO_BOOST_APPLIED
+		end
+	elseif( a.results ) then
+		for i,v in pairs(a.results) do 
+			if( not isItemNameStackable(v.name) ) then 
+				debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. v.name .. " that is not-stackable")
+				return NO_BOOST_APPLIED
+			end
+		end
 	end
 
 
@@ -135,7 +175,9 @@ function boost (a, targetTime, minimumTime)
 			boostRecipe( a.expensive, a.name.." expensive", boostFactor, targetTime, minimumTime )
 		end  
 
-		debugLog ("after boost :\n" .. serpent.block(a))
+		if( debugEnabled ) then
+			debugLog ("after boost :\n" .. serpent.block(a))
+		end
 
 	end
 end
