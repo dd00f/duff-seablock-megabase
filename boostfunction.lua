@@ -5,7 +5,7 @@ local infoEnabled = false
 -- set to true to enable debug logs
 local debugEnabled = false
 
-local MINIMUM_ENERGY_REQUIRED = 2
+local MINIMUM_ENERGY_REQUIRED = 3
 
 local NO_BOOST_APPLIED = -1
 
@@ -26,10 +26,10 @@ function infoLog (message)
 end
 
 function calculateBoost (energy, targetTime)
-	return targetTime / energy
+	return math.ceil(targetTime / energy)
 end
 
-function isItemNameStackable(itemName)
+function isItemNameBoostable(itemName)
 
 	resultItem = data.raw["fluid"][itemName]
 	if( resultItem == nil ) then
@@ -38,9 +38,15 @@ function isItemNameStackable(itemName)
 
 	if( resultItem == nil ) then
 		-- not an item, skipping
-		debugLog ("Not an ItemPrototype, deemed not stackable : " .. itemName)
+		debugLog ("Not an ItemPrototype, deemed not boostable : " .. itemName)
 		return false
 	end
+		
+	if( resultItem.place_result ) then
+		-- not an item, skipping
+		debugLog ("Item can be placed on the ground, deemed not boostable : " .. itemName)
+		return false
+	end		
 		
 	if( resultItem.flags ~= nil ) then 
 		for j,w in ipairs(resultItem.flags) do 
@@ -76,14 +82,14 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 	end
 	
 	if( a.result ) then
-		if( not isItemNameStackable(a.result) ) then 
-			debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. a.result .. " that is not-stackable")
+		if( not isItemNameBoostable(a.result) ) then 
+			debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. a.result .. " that is not boostable")
 			return NO_BOOST_APPLIED
 		end
 	elseif( a.results ) then
 		for i,v in pairs(a.results) do 
-			if( not isItemNameStackable(v.name) ) then 
-				debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. v.name .. " that is not-stackable")
+			if( not isItemNameBoostable(v.name) ) then 
+				debugLog ("Skipped applying boost to recipe " .. name .. " because it has item " .. v.name .. " that is not boostable")
 				return NO_BOOST_APPLIED
 			end
 		end
