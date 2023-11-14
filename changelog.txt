@@ -1,3 +1,8 @@
+1.1.5
+	- Disabled recipe boosting on any item that can be built on the ground
+	- Removed the minimum of 2 second recipe time before boosting
+	- Forced recipe boosting to use a round number to ensure no item fractions are generated
+
 1.1.4
 	- Fixed bug with factorio version >= 1.1.70 with some recipes producing non-stackable items.
 
