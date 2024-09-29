@@ -76,6 +76,11 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 		boostFactor = rootBoostFactor
 	end
 
+	if( a.hidden ) then 
+		debugLog ("Recipe " .. name .. " hidden is true, no boost applied." )
+		return NO_BOOST_APPLIED
+	end
+
 	if( a.energy_required and a.energy_required >= minimumTime ) then 
 		debugLog ("Recipe " .. name .. " energy required of " .. a.energy_required ..  " already matches minimum of " ..  minimumTime )
 		return NO_BOOST_APPLIED
@@ -125,9 +130,13 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 		debugLog (name .. " boosting a.result_count to ".. a.result_count)
 	elseif( a.results ) then 
 		for i,v in pairs(a.results) do 
+			if( v.catalyst_amount ) then 
+				v.catalyst_amount = v.catalyst_amount * boostFactor
+				debugLog (name .. " " .. i .. " " .. v.name .. " results boosting v.catalyst_amount to " ..v.catalyst_amount)
+			end
 			if( v.amount ) then 
 				v.amount = v.amount * boostFactor
-				debugLog (name .. " " .. i .. " result boosting v.amount to ".. v.amount)
+				debugLog (name .. " " .. i .. " " .. v.name .. " result boosting v.amount to ".. v.amount)
 			elseif( v.amount_min ) then
 				v.amount_min = v.amount_min * boostFactor
 				if( v.amount_max ) then
@@ -135,7 +144,7 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 				end
 			else
 				v[2] = v[2] * boostFactor
-				debugLog("boosted ingredient array " .. v[1] .. " to " .. v[2])
+				debugLog(name .. " " .. v.name .. " boosted ingredient array " .. v[1] .. " to " .. v[2])
 			end 
 		end
 	else
@@ -145,12 +154,16 @@ function boostRecipe (a, name, rootBoostFactor, targetTime, minimumTime)
 
 	if( a.ingredients ) then 
 		for i,v in pairs(a.ingredients) do 
+			if( v.catalyst_amount ) then 
+				v.catalyst_amount = v.catalyst_amount * boostFactor
+				debugLog (name .. " " .. i .. " " .. v.name .. " ingredients boosting v.catalyst_amount to " ..v.catalyst_amount)
+			end
 			if( v.amount ) then 
 				v.amount = v.amount * boostFactor
-				debugLog (name .. " " .. i .." ingredients boosting v.amount to " ..v.amount)
+				debugLog (name .. " " .. i .. " " .. v.name .. " ingredients boosting v.amount to " ..v.amount)
 			else
 				v[2] = v[2] * boostFactor
-				debugLog("boosted ingredient array " .. v[1] .. " to " .. v[2])
+				debugLog(name .. " " .. v.name .. "boosted ingredient array " .. v[1] .. " to " .. v[2])
 			end 
 		end
 	end

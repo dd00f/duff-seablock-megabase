@@ -1,3 +1,10 @@
+1.1.6
+	- Fixed a bug where catalyst_amount result items weren't boosted in proportion to the output, 
+	  causing catalyst to be impacted by productivity bonuses.
+	- Skipped applying a recipe boost to recipes that are hidden. This helps improve mod compatibility
+	  with the Wire Shortcut mod that cross-links ingredient tables between 2 recipes, causing ingredients
+	  to be incorrectly boosted twice.
+
 1.1.5
 	- Disabled recipe boosting on any item that can be built on the ground
 	- Removed the minimum of 2 second recipe time before boosting
